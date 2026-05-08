@@ -1,0 +1,134 @@
+/* ============================================================
+   FOOTER — Rodapé · WhatsApp Flutuante
+   ============================================================ */
+
+/* ---- Rodapé ----------------------------------------------- */
+.footer             { background: var(--navy-dk) }
+
+.footer__accent {
+  height     : 3px;
+  background : linear-gradient(90deg, var(--teal) 0%, rgba(74,171,155,.2) 60%, transparent 100%);
+}
+.footer__inner {
+  display               : grid;
+  grid-template-columns : 1.5fr 0.9fr 1.5fr;
+  gap                   : 56px;
+  padding-top           : 56px;
+  padding-bottom        : 44px;
+  border-bottom         : .5px solid rgba(255,255,255,.08);
+}
+
+/* ----- Marca ----- */
+.footer__logo-top {
+  font-family : var(--fs);
+  font-size   : 21px;
+  font-weight : 700;
+  color       : #fff;
+}
+.footer__logo-bot {
+  font-family : var(--fs);
+  font-size   : 21px;
+  font-weight : 700;
+  color       : var(--teal);
+  font-style  : italic;
+  margin-bottom: 8px;
+}
+.footer__tagline {
+  font-family    : var(--fcond);
+  font-size      : 10px;
+  letter-spacing : 2px;
+  text-transform : uppercase;
+  color          : rgba(255,255,255,.28);
+  margin-bottom  : 16px;
+}
+.footer__areas      { display: flex; flex-wrap: wrap; gap: 5px }
+.footer__areas span {
+  font-family    : var(--fcond);
+  font-size      : 8.5px;
+  font-weight    : 500;
+  letter-spacing : 1px;
+  text-transform : uppercase;
+  color          : rgba(255,255,255,.38);
+  border         : .5px solid rgba(255,255,255,.15);
+  padding        : 2px 8px;
+  border-radius  : 4px;
+}
+
+/* ----- Navegação interna ----- */
+.footer__nav h4,
+.footer__contact h4 {
+  font-family    : var(--fcond);
+  font-size      : 9.5px;
+  font-weight    : 600;
+  letter-spacing : 2px;
+  text-transform : uppercase;
+  color          : var(--teal);
+  margin-bottom  : 16px;
+  opacity        : .8;
+}
+.footer__nav        { display: flex; flex-direction: column; gap: 10px }
+.footer__nav a {
+  font-size  : 13px;
+  color      : rgba(255,255,255,.45);
+  transition : color .2s;
+}
+.footer__nav a:hover { color: #fff }
+
+/* ----- Informações de contato ----- */
+.footer__contact    { display: flex; flex-direction: column; gap: 10px }
+.footer__contact address {
+  font-size   : 13px;
+  color       : rgba(255,255,255,.45);
+  line-height : 1.8;
+}
+.footer__contact a {
+  font-size  : 13px;
+  color      : rgba(255,255,255,.45);
+  transition : color .2s;
+}
+.footer__contact a:hover { color: var(--teal) }
+
+.footer__wa         { display: flex; align-items: center; gap: 7px; color: var(--green-wa) !important }
+.footer__wa svg     { flex-shrink: 0; width: 14px; height: 14px }
+
+/* ----- Rodapé inferior ----- */
+.footer__bottom     { padding: 16px 0 }
+.footer__bottom-inner {
+  display         : flex;
+  align-items     : center;
+  justify-content : space-between;
+  font-size       : 11px;
+  color           : rgba(255,255,255,.22);
+  flex-wrap       : wrap;
+  gap             : 8px;
+}
+
+/* ---- WhatsApp Flutuante ------------------------------------ */
+.wa-float {
+  position       : fixed;
+  bottom         : 28px;
+  right          : 28px;
+  z-index        : 800;
+  display        : flex;
+  align-items    : center;
+  gap            : 10px;
+  background     : var(--green-wa);
+  color          : #fff;
+  padding        : 14px 20px;
+  border-radius  : 50px;
+  box-shadow     : 0 4px 20px rgba(37,211,102,.4);
+  font-family    : var(--fcond);
+  font-size      : 12px;
+  font-weight    : 700;
+  letter-spacing : 1px;
+  text-transform : uppercase;
+  transition     : transform .25s, box-shadow .25s;
+  animation      : wafloat 3s ease-in-out infinite;
+}
+.wa-float svg       { width: 20px; height: 20px; flex-shrink: 0 }
+.wa-float:hover     { transform: scale(1.07); box-shadow: 0 6px 28px rgba(37,211,102,.5) }
+
+@keyframes wafloat {
+  0%, 100% { transform: translateY(0) }
+  50%       { transform: translateY(-5px) }
+}

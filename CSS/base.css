@@ -1,0 +1,168 @@
+/* ============================================================
+   BASE — Reset · Variáveis · Utilitários Globais
+   ============================================================ */
+
+/* ----- Reset ----- */
+*, *::before, *::after {
+  box-sizing : border-box;
+  margin     : 0;
+  padding    : 0;
+}
+
+/* ----- Variáveis CSS ----- */
+:root {
+  /* Cores */
+  --navy      : #0d2244;
+  --navy-dk   : #091830;
+  --teal      : #4aab9b;
+  --teal-dk   : #378880;
+  --teal-lt   : #e0f5f1;
+  --bg        : #f4f7f9;
+  --text      : #3a5070;
+  --white     : #ffffff;
+  --gray      : #e8edf2;
+  --gray-dk   : #c8d4de;
+  --amber     : #d97706;
+  --amber-lt  : #fef3dd;
+  --green-wa  : #25d366;
+
+  /* Tipografia */
+  --fs        : 'Cormorant Garamond', Georgia, serif;
+  --fsans     : 'Barlow', sans-serif;
+  --fcond     : 'Barlow Condensed', sans-serif;
+
+  /* Layout */
+  --nav-h     : 72px;
+  --sp        : 96px;
+  --cw        : 1200px;
+}
+
+/* ----- Elementos Base ----- */
+html {
+  scroll-behavior    : smooth;
+  font-size          : 16px;
+}
+
+body {
+  font-family        : var(--fsans);
+  background         : var(--bg);
+  color              : var(--text);
+  line-height        : 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, svg  { display: block }
+a         { text-decoration: none; color: inherit }
+ul        { list-style: none }
+button    { cursor: pointer; font-family: inherit }
+address   { font-style: normal }
+
+/* ----- Container ----- */
+.container {
+  width      : 100%;
+  max-width  : var(--cw);
+  margin     : 0 auto;
+  padding    : 0 32px;
+}
+
+/* ----- Reveal (animação ao rolar) ----- */
+.reveal {
+  opacity    : 0;
+  transform  : translateY(26px);
+  transition : opacity   .65s cubic-bezier(.25,.46,.45,.94),
+               transform .65s cubic-bezier(.25,.46,.45,.94);
+}
+.reveal.visible  { opacity: 1; transform: none }
+.reveal--d1      { transition-delay: .12s }
+.reveal--d2      { transition-delay: .24s }
+.reveal--d3      { transition-delay: .36s }
+
+/* ----- Labels & Títulos de Seção ----- */
+.sec-label {
+  display        : inline-flex;
+  align-items    : center;
+  gap            : 10px;
+  font-family    : var(--fcond);
+  font-size      : 11px;
+  font-weight    : 600;
+  letter-spacing : 2.5px;
+  text-transform : uppercase;
+  color          : var(--teal);
+  margin-bottom  : 14px;
+}
+.sec-label::before {
+  content    : '';
+  width      : 22px;
+  height     : 1.5px;
+  background : var(--teal);
+}
+.sec-label--teal { color: var(--teal) }
+
+.sec-title {
+  font-family   : var(--fs);
+  font-size     : clamp(28px, 4vw, 44px);
+  font-weight   : 600;
+  line-height   : 1.1;
+  color         : var(--navy);
+  margin-bottom : 20px;
+}
+.sec-title em         { font-style: italic; color: var(--teal) }
+.sec-title--white     { color: #fff }
+.sec-hdr              { margin-bottom: 52px }
+
+/* ----- Botões ----- */
+.btn {
+  display        : inline-flex;
+  align-items    : center;
+  gap            : 8px;
+  padding        : 13px 28px;
+  border-radius  : 8px;
+  font-family    : var(--fcond);
+  font-size      : 13px;
+  font-weight    : 600;
+  letter-spacing : 1.5px;
+  text-transform : uppercase;
+  transition     : all .22s ease;
+  border         : 1.5px solid transparent;
+}
+
+.btn-p {
+  background   : var(--teal);
+  color        : var(--navy);
+  border-color : var(--teal);
+}
+.btn-p:hover {
+  background   : var(--teal-dk);
+  border-color : var(--teal-dk);
+  transform    : translateY(-2px);
+  box-shadow   : 0 6px 20px rgba(74,171,155,.35);
+}
+
+.btn-g {
+  background   : transparent;
+  color        : #fff;
+  border-color : rgba(255,255,255,.4);
+}
+.btn-g:hover {
+  border-color : var(--teal);
+  color        : var(--teal);
+  transform    : translateY(-2px);
+}
+
+.btn-full { width: 100%; justify-content: center }
+
+.btn-spin {
+  width     : 16px;
+  height    : 16px;
+  animation : spin .9s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg) } }
+
+/* ----- Scrollbar ----- */
+::-webkit-scrollbar              { width: 6px }
+::-webkit-scrollbar-track        { background: var(--navy-dk) }
+::-webkit-scrollbar-thumb        { background: rgba(74,171,155,.4); border-radius: 3px }
+::-webkit-scrollbar-thumb:hover  { background: var(--teal) }
+
+/* ----- Seleção de texto ----- */
+::selection { background: rgba(74,171,155,.25); color: inherit }

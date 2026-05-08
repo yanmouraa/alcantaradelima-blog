@@ -365,7 +365,11 @@
   transition    : transform .25s, box-shadow .25s, border-color .25s;
   box-shadow    : 0 2px 8px rgba(13,34,68,.07);
 }
-.blog-card:hover { transform: translateY(-5px); box-shadow: 0 8px 28px rgba(13,34,68,.12); border-color: rgba(74,171,155,.3) }
+.blog-card:hover { 
+  transform: translateY(-5px); 
+  box-shadow: 0 8px 28px rgba(13,34,68,.12); 
+  border-color: rgba(74,171,155,.3) 
+}
 
 .blog-card__img {
   height              : 180px;

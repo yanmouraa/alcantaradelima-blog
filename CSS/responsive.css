@@ -1,0 +1,210 @@
+/* ============================================================
+   RESPONSIVE — Media Queries para Mobile · Tablet
+   ============================================================ */
+
+/* ---- TABLET (até 768px) ----------------------------------- */
+@media (max-width: 768px) {
+  /* Tipografia */
+  html { font-size: 15px }
+  
+  /* Container */
+  .container { padding: 0 16px }
+  
+  /* Navegação */
+  .nav__links {
+    position: absolute;
+    top: var(--nav-h);
+    left: 0;
+    right: 0;
+    background: rgba(13,34,68,.98);
+    flex-direction: column;
+    gap: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .3s;
+  }
+  .nav__links.open {
+    max-height: 400px;
+  }
+  .nav__link {
+    padding: 16px 20px;
+    border-radius: 0;
+  }
+  
+  .nav__burger { display: flex }
+  
+  /* Hero */
+  .hero__content {
+    padding: calc(var(--nav-h) + 40px) 16px 40px;
+    gap: 16px;
+  }
+  
+  .hero__title { font-size: clamp(36px, 6vw, 58px) }
+  .hero__tagline { font-size: clamp(16px, 4vw, 20px); padding-left: 16px }
+  .hero__sub { font-size: 13px; padding-left: 16px }
+  
+  /* Diferenciais */
+  .diff__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+  }
+  .diff__item {
+    padding: 20px 16px;
+    flex-direction: column;
+    text-align: center;
+    border-right: none;
+    border-bottom: .5px solid rgba(255,255,255,.07);
+  }
+  .diff__item:nth-child(odd) { border-right: .5px solid rgba(255,255,255,.07) }
+  
+  /* MVF */
+  .mvf {
+    padding: 48px 0;
+  }
+  .mvf__grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+    border-radius: 0;
+  }
+  .mvf__card {
+    padding: 28px 20px;
+    border-bottom: .5px solid rgba(255,255,255,.06);
+  }
+  .mvf__card:last-child { border-bottom: none }
+  
+  /* Sobre */
+  .sobre {
+    padding: 48px 0;
+  }
+  .sobre__grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  
+  /* Serviços */
+  .servicos {
+    padding: 48px 0;
+  }
+  .srv-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .sec-hdr { margin-bottom: 32px }
+  
+  /* Blog */
+  .blog {
+    padding: 48px 0;
+  }
+  .blog__grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  
+  /* Contato */
+  .contato {
+    padding: 48px 0;
+  }
+  .contato__grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .contato__form {
+    grid-template-columns: 1fr;
+  }
+  
+  /* Footer */
+  .footer__inner {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding-top: 32px;
+    padding-bottom: 24px;
+  }
+}
+
+/* ---- MOBILE (até 480px) ---------------------------------- */
+@media (max-width: 480px) {
+  html { font-size: 14px }
+  
+  .container { padding: 0 12px }
+  
+  /* Navegação */
+  .nav__inner { padding: 0 16px }
+  .nav__logo-top, .nav__logo-bot { font-size: 14px }
+  .nav__logo-sub { font-size: 7px }
+  
+  /* Hero */
+  .hero__content { padding: calc(var(--nav-h) + 24px) 12px 24px }
+  .hero__title { font-size: clamp(28px, 5vw, 48px) }
+  .hero__tagline {
+    font-size: clamp(14px, 3vw, 18px);
+    padding-left: 12px;
+  }
+  .hero__sub { font-size: 12px; padding-left: 12px }
+  .hero__btns { flex-direction: column; gap: 12px }
+  
+  .btn { padding: 12px 20px; font-size: 12px }
+  
+  /* Diferenciais */
+  .diff__grid {
+    grid-template-columns: 1fr;
+  }
+  .diff__item {
+    padding: 16px 12px;
+    border-right: none;
+    border-bottom: .5px solid rgba(255,255,255,.07);
+  }
+  .diff__item:last-child { border-bottom: none }
+  .diff__title { font-size: 10px }
+  .diff__sub { font-size: 11px }
+  
+  /* MVF */
+  .mvf { padding: 36px 0 }
+  .mvf__card { padding: 20px 16px }
+  .mvf__card h3 { font-size: 18px }
+  .mvf__card p { font-size: 13px }
+  
+  /* Sobre */
+  .sobre { padding: 36px 0 }
+  .sobre__lead { font-size: 16px }
+  .sobre__body { font-size: 14px }
+  
+  /* Serviços */
+  .servicos { padding: 36px 0 }
+  .servicos__sub { font-size: 14px }
+  .srv-grid { gap: 12px }
+  
+  .srv-card { padding: 20px 16px }
+  .srv-card__num { font-size: 36px }
+  .srv-card__title { font-size: 18px }
+  .srv-card__body { font-size: 13px }
+  
+  /* Blog */
+  .blog { padding: 36px 0 }
+  .blog__grid { gap: 12px; margin-bottom: 24px }
+  .blog-card__img { height: 140px }
+  .blog-card__title { font-size: 16px }
+  .blog-card__excerpt { font-size: 12px }
+  
+  /* Contato */
+  .contato { padding: 36px 0 }
+  .contato__body { font-size: 14px }
+  .form-group label { font-size: 9px }
+  .form-group input,
+  .form-group select,
+  .form-group textarea { padding: 10px 12px; font-size: 13px }
+  
+  /* Footer */
+  .footer__inner { gap: 24px; padding-top: 24px }
+  .footer__logo-top, .footer__logo-bot { font-size: 18px }
+  .footer__nav a, .footer__contact a { font-size: 12px }
+  
+  /* WhatsApp Float */
+  .wa-float {
+    bottom: 20px;
+    right: 20px;
+    padding: 12px 16px;
+    font-size: 11px;
+  }
+  .wa-float__label { display: none }
+}

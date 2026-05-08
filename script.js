@@ -1,15 +1,20 @@
 'use strict';
 
 const HERO_IMG = 'imagens/ponte.jpg';
+const BLOG_IMAGES = {
+  '.blog-card__img--1': '../imagens/Torre_de_Belem.jpg',
+  '.blog-card__img--2': '../imagens/Opera_de_Arame.jpeg',
+  '.blog-card__img--3': '../imagens/Arco_da_Rua_Augusta.jpeg'
+};
 
 document.addEventListener('DOMContentLoaded', function() {
 
   // Aplica a foto no hero e nos cards do blog
   const heroBg = document.getElementById('heroBg');
   if (heroBg) heroBg.style.backgroundImage = 'url(' + HERO_IMG + ')';
-  ['.blog-card__img--1','.blog-card__img--2','.blog-card__img--3'].forEach(sel => {
-    const el = document.querySelector(sel);
-    if (el) el.style.backgroundImage = 'url(' + HERO_IMG + ')';
+  Object.entries(BLOG_IMAGES).forEach(([selector, imageUrl]) => {
+    const el = document.querySelector(selector);
+    if (el) el.style.backgroundImage = 'url(' + imageUrl + ')';
   });
 
   // NAV

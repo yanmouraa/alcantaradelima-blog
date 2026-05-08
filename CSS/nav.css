@@ -74,9 +74,17 @@
   transition      : color .2s, background .2s;
 }
 .nav__link:hover,
-.nav__link.active           { color: #fff; background: rgba(255,255,255,.06) }
+.nav__link.active { 
+  color: #fff; 
+  background: rgba(255,255,255,.06) 
+}
 
-.nav__link--cta             { background: var(--teal); color: var(--navy) !important; font-weight: 600; margin-left: 6px }
+.nav__link--cta { 
+  background: var(--teal); 
+  color: var(--navy) !important; 
+  font-weight: 600; 
+  margin-left: 6px 
+}
 .nav__link--cta:hover       { background: var(--teal-dk) !important; color: #fff !important }
 
 /* ----- Burger (mobile) ----- */

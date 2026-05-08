@@ -1,2 +1,8 @@
 # alcantaradelima-blog
-Pequeno blog sobre o trabalho do meu tio, primeiro trabalho como iniciante na área como dev web asssim adiquirindo conhecimento 
+Pequeno blog sobre o trabalho do meu tio, primeiro trabalho como iniciante na área como dev web asssim adiquirindo conhecimento .
+
+08/05/2026
+
+Vou criar um arquivo Css separado para guardar algumas coisas que foram alteradas, caso seja necessario recuperação no futuro, vai se chamar backup.css .
+
+Conforme foi ordenado, removi a div "adv-card__av" e salvei seu css na pasta backup.css .

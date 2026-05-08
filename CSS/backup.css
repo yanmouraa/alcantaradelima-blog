@@ -1,0 +1,16 @@
+/* Backup - Imagem Do Advogado - removido em 8 de maio de 2026) */
+.adv-card__av {
+  width          : 62px;
+  height         : 62px;
+  border-radius  : 50%;
+  background     : rgba(74,171,155,.2);
+  border         : 2px solid var(--teal);
+  display        : flex;
+  align-items    : center;
+  justify-content: center;
+  font-family    : var(--fs);
+  font-size      : 20px;
+  font-weight    : 700;
+  color          : var(--teal);
+  flex-shrink    : 0;
+}

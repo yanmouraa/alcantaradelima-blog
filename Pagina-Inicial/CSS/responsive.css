@@ -134,16 +134,35 @@
   .nav__logo-sub { font-size: 7px }
   
   /* Hero */
-  .hero__content { padding: calc(var(--nav-h) + 24px) 12px 24px }
-  .hero__title { font-size: clamp(28px, 5vw, 48px) }
+  .hero__content { 
+    padding: calc(var(--nav-h) + 24px) 12px 24px 
+  }
+
+  .hero__title { 
+    font-size: clamp(28px, 5vw, 48px) 
+  }
+
   .hero__tagline {
     font-size: clamp(14px, 3vw, 18px);
     padding-left: 12px;
   }
-  .hero__sub { font-size: 12px; padding-left: 12px }
-  .hero__btns { flex-direction: column; gap: 12px }
+
+  .hero__sub { 
+    font-size: 12px; 
+    padding-left: 12px; 
+  }
+
+  .hero__btns { 
+    flex-direction: column; 
+    gap: 12px; 
+    justify-content: flex-start;
+  }
   
-  .btn { padding: 12px 20px; font-size: 12px }
+  .btn { 
+    padding: 12px 20px; 
+    font-size: 12px;
+    width: fit-content;
+  }
   
   /* Diferenciais */
   .diff__grid {

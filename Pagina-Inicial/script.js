@@ -2,9 +2,9 @@
 
 const HERO_IMG = 'imagens/ponte.jpg';
 const BLOG_IMAGES = {
-  '.blog-card__img--1': '../imagens/Torre_de_Belem.jpg',
-  '.blog-card__img--2': '../imagens/Opera_de_Arame.jpeg',
-  '.blog-card__img--3': '../imagens/Arco_da_Rua_Augusta.jpeg'
+  '.blog-card__img--1': 'imagens/Torre_de_Belem.jpg',
+  '.blog-card__img--2': 'imagens/Opera_de_Arame.jpeg',
+  '.blog-card__img--3': 'imagens/Arco_da_Rua_Augusta.jpeg'
 };
 
 document.addEventListener('DOMContentLoaded', function() {

@@ -1,0 +1,261 @@
+/* ============================================================
+   MAIN — Seção Principal (Em Construção)
+   ============================================================ */
+
+.uc-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: calc(var(--nav-h) + 80px) 32px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.uc-wrap::before {
+  content: '';
+  position: absolute; 
+  inset: 0;
+  background: linear-gradient(135deg, var(--navy-dk) 0%, var(--navy) 50%, #0e2a50 100%);
+  z-index: 0;
+}
+
+.uc-wrap::after {
+  content: '';
+  position: absolute; 
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(74,171,155,.07) 60px),
+    repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(74,171,155,.07) 60px);
+  z-index: 1;
+}
+
+.uc-accent {
+  position: absolute;
+  width: 600px; 
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(74,171,155,.12) 0%, transparent 70%);
+  top: 50%; 
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.uc-content {
+  position: relative; 
+  z-index: 2;
+  max-width: 720px; 
+  width: 100%;
+  text-align: center;
+}
+
+/* ── ÍCONE ── */
+.uc-icon {
+  display: inline-flex;
+  align-items: center; 
+  justify-content: center;
+  width: 88px; 
+  height: 88px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(74,171,155,.4);
+  background: rgba(74,171,155,.08);
+  margin: 0 auto 36px;
+  animation: pulse 3s ease-in-out infinite;
+}
+
+.uc-icon svg { 
+  width: 38px; 
+  height: 38px; 
+  stroke: var(--teal); 
+  stroke-width: 1.5; 
+  fill: none; 
+}
+
+/* ── LABEL ── */
+.uc-label {
+  display: inline-flex; 
+  align-items: center; 
+  gap: 10px;
+  font-family: var(--fcond); 
+  font-size: 11px; 
+  font-weight: 600;
+  letter-spacing: 2.5px; 
+  text-transform: uppercase;
+  color: var(--teal); 
+  margin-bottom: 20px;
+}
+
+.uc-label::before, .uc-label::after {
+  content: ''; 
+  width: 28px; 
+  height: 1.5px; 
+  background: var(--teal);
+}
+
+/* ── TÍTULO ── */
+.uc-title {
+  font-family: var(--fs);
+  font-size: clamp(38px, 6vw, 68px);
+  font-weight: 600; 
+  line-height: 1.05;
+  color: #fff;
+  margin-bottom: 12px;
+}
+
+.uc-title em { 
+  font-style: italic; 
+  color: var(--teal); 
+}
+
+/* ── SUBTÍTULO ── */
+.uc-subtitle {
+  font-family: var(--fs);
+  font-size: clamp(16px, 2.2vw, 22px);
+  font-weight: 400; 
+  font-style: italic;
+  color: rgba(255,255,255,.55);
+  margin-bottom: 36px;
+}
+
+/* ── DIVISOR ── */
+.uc-divider {
+  width: 56px; 
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent, var(--teal), transparent);
+  margin: 0 auto 36px;
+}
+
+/* ── DESCRIÇÃO ── */
+.uc-desc {
+  font-family: var(--fsans);
+  font-size: 15px; 
+  font-weight: 300;
+  color: rgba(255,255,255,.55);
+  line-height: 1.85;
+  max-width: 520px; 
+  margin: 0 auto 52px;
+}
+
+.uc-desc strong { 
+  color: rgba(255,255,255,.75); 
+  font-weight: 500; 
+}
+
+/* ── TÓPICOS ── */
+.uc-topics {
+  display: flex; 
+  flex-wrap: wrap;
+  gap: 10px; 
+  justify-content: center;
+  margin-bottom: 52px;
+}
+
+.uc-topic {
+  font-family: var(--fcond);
+  font-size: 11px; 
+  font-weight: 500;
+  letter-spacing: 1.2px; 
+  text-transform: uppercase;
+  color: rgba(255,255,255,.5);
+  padding: 6px 16px;
+  border: .5px solid rgba(255,255,255,.12);
+  border-radius: 4px;
+  background: rgba(255,255,255,.03);
+  transition: all .22s;
+}
+
+.uc-topic:hover {
+  color: var(--teal);
+  border-color: rgba(74,171,155,.35);
+  background: rgba(74,171,155,.06);
+}
+
+/* ── BOTÕES ── */
+.uc-cta { 
+  display: flex; 
+  gap: 14px; 
+  justify-content: center; 
+  flex-wrap: wrap; 
+}
+
+.btn {
+  display: inline-flex; 
+  align-items: center; 
+  gap: 8px;
+  padding: 13px 28px; 
+  border-radius: 8px;
+  font-family: var(--fcond); 
+  font-size: 13px;
+  font-weight: 600; 
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  transition: all .22s ease;
+  border: 1.5px solid transparent;
+}
+
+.btn-p { 
+  background: var(--teal); 
+  color: var(--navy); 
+  border-color: var(--teal); 
+}
+
+.btn-p:hover { 
+  background: var(--teal-dk); 
+  border-color: var(--teal-dk); 
+  transform: translateY(-2px); 
+  box-shadow: 0 6px 20px rgba(74,171,155,.35); 
+}
+
+.btn-g { 
+  background: transparent; 
+  color: #fff; 
+  border-color: rgba(255,255,255,.25); 
+}
+
+.btn-g:hover { 
+  border-color: var(--teal); 
+  color: var(--teal); 
+  transform: translateY(-2px); 
+}
+
+/* ── BARRA DE PROGRESSO ── */
+.uc-progress {
+  margin-top: 64px;
+  padding-top: 32px;
+  border-top: .5px solid rgba(255,255,255,.08);
+}
+
+.uc-progress-label {
+  font-family: var(--fcond); 
+  font-size: 10px; 
+  font-weight: 500;
+  letter-spacing: 2px; 
+  text-transform: uppercase;
+  color: rgba(255,255,255,.25);
+  margin-bottom: 10px;
+}
+
+.uc-bar-track {
+  width: 220px; 
+  height: 2px;
+  background: rgba(255,255,255,.08);
+  border-radius: 2px; 
+  margin: 0 auto 10px; 
+  overflow: hidden;
+}
+
+.uc-bar-fill {
+  height: 100%; 
+  width: 0;
+  background: linear-gradient(90deg, var(--teal-dk), var(--teal));
+  border-radius: 2px;
+  animation: fillBar 2.4s cubic-bezier(.25,.46,.45,.94) .3s forwards;
+}
+
+.uc-bar-pct {
+  font-family: var(--fcond); 
+  font-size: 11px;
+  color: rgba(255,255,255,.25);
+}

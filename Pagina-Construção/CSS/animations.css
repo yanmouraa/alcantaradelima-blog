@@ -1,0 +1,55 @@
+/* ============================================================
+   ANIMATIONS — Animações
+   ============================================================ */
+
+/* ── REVEAL (Fade In com Slide) ── */
+.reveal { 
+  opacity: 0; 
+  transform: translateY(24px); 
+  transition: opacity .65s cubic-bezier(.25,.46,.45,.94), 
+              transform .65s cubic-bezier(.25,.46,.45,.94); 
+}
+
+.reveal.visible { 
+  opacity: 1; 
+  transform: none; 
+}
+
+.reveal--d1 { 
+  transition-delay: .1s; 
+}
+
+.reveal--d2 { 
+  transition-delay: .22s; 
+}
+
+.reveal--d3 { 
+  transition-delay: .34s; 
+}
+
+.reveal--d4 { 
+  transition-delay: .46s; 
+}
+
+.reveal--d5 { 
+  transition-delay: .58s; 
+}
+
+/* ── PULSE (Ícone) ── */
+@keyframes pulse {
+  0%, 100% { 
+    box-shadow: 0 0 0 0 rgba(74,171,155,0); 
+    transform: scale(1); 
+  }
+  50% { 
+    box-shadow: 0 0 0 16px rgba(74,171,155,.08); 
+    transform: scale(1.04); 
+  }
+}
+
+/* ── FILLBAR (Barra de Progresso) ── */
+@keyframes fillBar { 
+  to { 
+    width: 65%; 
+  } 
+}

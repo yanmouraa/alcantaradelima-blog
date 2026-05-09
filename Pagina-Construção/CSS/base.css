@@ -1,0 +1,61 @@
+/* ============================================================
+   BASE — Reset, Variáveis e Tipografia
+   ============================================================ */
+
+*, *::before, *::after { 
+  box-sizing: border-box; 
+  margin: 0; 
+  padding: 0; 
+}
+
+:root {
+  --navy     : #0d2244;
+  --navy-dk  : #091830;
+  --teal     : #4aab9b;
+  --teal-dk  : #378880;
+  --teal-lt  : #e0f5f1;
+  --bg       : #f4f7f9;
+  --text     : #3a5070;
+  --white    : #ffffff;
+  --gray     : #e8edf2;
+  --gray-dk  : #c8d4de;
+  --fs       : 'Cormorant Garamond', Georgia, serif;
+  --fsans    : 'Barlow', sans-serif;
+  --fcond    : 'Barlow Condensed', sans-serif;
+  --nav-h    : 72px;
+  --cw       : 1200px;
+}
+
+html { 
+  scroll-behavior: smooth; 
+  font-size: 16px; 
+}
+
+body {
+  font-family: var(--fsans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+img, svg { 
+  display: block; 
+}
+
+a { 
+  text-decoration: none; 
+  color: inherit; 
+}
+
+ul { 
+  list-style: none; 
+}
+
+button { 
+  cursor: pointer; 
+  font-family: inherit; 
+}

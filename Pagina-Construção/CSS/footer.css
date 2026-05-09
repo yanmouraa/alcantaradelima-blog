@@ -1,0 +1,56 @@
+/* ============================================================
+   FOOTER — Rodapé
+   ============================================================ */
+
+footer {
+  background: var(--navy-dk);
+  border-top: .5px solid rgba(255,255,255,.06);
+  padding: 28px 32px;
+}
+
+.footer-inner {
+  max-width: var(--cw); 
+  margin: 0 auto;
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between;
+  flex-wrap: wrap; 
+  gap: 12px;
+}
+
+.footer-logo { 
+  display: flex; 
+  flex-direction: column; 
+  line-height: 1; 
+  gap: 1px; 
+}
+
+.footer-logo-top { 
+  font-family: var(--fs); 
+  font-size: 14px; 
+  font-weight: 600; 
+  color: #fff; 
+}
+
+.footer-logo-bot { 
+  font-family: var(--fs); 
+  font-size: 14px; 
+  font-weight: 600; 
+  color: var(--teal); 
+}
+
+.footer-logo-sub { 
+  font-family: var(--fcond); 
+  font-size: 7px; 
+  letter-spacing: 3px; 
+  color: rgba(255,255,255,.25); 
+  margin-top: 2px; 
+}
+
+.footer-copy {
+  font-family: var(--fcond); 
+  font-size: 10px; 
+  font-weight: 400;
+  letter-spacing: 1px; 
+  color: rgba(255,255,255,.2);
+}

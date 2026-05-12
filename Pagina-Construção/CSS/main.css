@@ -51,49 +51,6 @@
   text-align: center;
 }
 
-/* ── ÍCONE ── */
-.uc-icon {
-  display: inline-flex;
-  align-items: center; 
-  justify-content: center;
-  width: 88px; 
-  height: 88px;
-  border-radius: 50%;
-  border: 1.5px solid rgba(74,171,155,.4);
-  background: rgba(74,171,155,.08);
-  margin: 0 auto 36px;
-  animation: pulse 3s ease-in-out infinite;
-}
-
-.uc-icon svg { 
-  width: 38px; 
-  height: 38px; 
-  stroke: var(--teal); 
-  stroke-width: 1.5; 
-  fill: none; 
-}
-
-/* ── LABEL ── */
-.uc-label {
-  display: inline-flex; 
-  align-items: center; 
-  gap: 10px;
-  font-family: var(--fcond); 
-  font-size: 11px; 
-  font-weight: 600;
-  letter-spacing: 2.5px; 
-  text-transform: uppercase;
-  color: var(--teal); 
-  margin-bottom: 20px;
-}
-
-.uc-label::before, .uc-label::after {
-  content: ''; 
-  width: 28px; 
-  height: 1.5px; 
-  background: var(--teal);
-}
-
 /* ── TÍTULO ── */
 .uc-title {
   font-family: var(--fs);

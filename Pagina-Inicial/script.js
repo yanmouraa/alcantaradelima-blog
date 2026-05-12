@@ -245,7 +245,8 @@ function initializeContactForm() {
   });
 
   // Validação e envio do formulário
-  form.addEventListener('submit', async (event) => {
+  form.addEventListener('submit', function(event) {
+    // 1. Intercepta o envio para validar os campos primeiro
     event.preventDefault();
 
     // Coleta valores dos campos
@@ -254,7 +255,7 @@ function initializeContactForm() {
     const subject = document.getElementById('assunto').value;
     const message = document.getElementById('mensagem').value.trim();
 
-    // Validação
+    // Lógica de Validação
     let isValid = true;
 
     if (!name || name.length < 3) {
@@ -285,9 +286,11 @@ function initializeContactForm() {
       clearError('mensagem');
     }
 
+    // Se NÃO for válido, para a execução aqui
     if (!isValid) return;
 
-    // Envia o formulário
+    // 2. Se chegou aqui, os dados estão corretos! 
+    // Vamos preparar o botão visualmente
     const submitBtn = document.getElementById('submitBtn');
     const btnText = document.getElementById('btnText');
     const btnSpinner = document.getElementById('btnSpinner');
@@ -296,26 +299,9 @@ function initializeContactForm() {
     btnText.textContent = 'Enviando...';
     btnSpinner.hidden = false;
 
-    // TODO: Integrar com Formspree ou EmailJS
-    // Exemplo: const response = await fetch('https://formspree.io/f/ID', { ... })
-    await new Promise((resolve) => setTimeout(resolve, 1800));
-
-    // Restaura estado do botão
-    submitBtn.disabled = false;
-    btnText.textContent = 'Enviar mensagem';
-    btnSpinner.hidden = true;
-
-    // Mostra mensagem de sucesso
-    const successMessage = document.getElementById('formSuccess');
-    successMessage.hidden = false;
-    form.reset();
-
-    // Scroll para a mensagem de sucesso
-    successMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-
-    // Oculta mensagem após 6 segundos
-    setTimeout(() => {
-      successMessage.hidden = true;
-    }, 6000);
-  });
+    // 3. ENVIO REAL:
+    // O comando abaixo "solta" o formulário para o 'action' do HTML.
+    // O navegador sairá da página e irá para o FormSubmit.
+    this.submit(); 
+});
 }

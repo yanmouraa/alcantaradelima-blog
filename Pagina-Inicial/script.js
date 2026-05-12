@@ -1,5 +1,6 @@
 'use strict';
 
+// ==================== CONSTANTES ====================
 const HERO_IMG = 'imagens/ponte.jpg';
 const BLOG_IMAGES = {
   '.blog-card__img--1': 'imagens/Torre_de_Belem.jpg',
@@ -7,119 +8,314 @@ const BLOG_IMAGES = {
   '.blog-card__img--3': 'imagens/Arco_da_Rua_Augusta.jpeg'
 };
 
+// ==================== INICIALIZAÇÃO ====================
 document.addEventListener('DOMContentLoaded', function() {
+  loadBackgroundImages();
+  initializeNavigation();
+  initializeMobileMenu();
+  initializeScrollReveal();
+  initializeSmoothScroll();
+  initializePhoneMask();
+  initializeContactForm();
+});
 
-  // Aplica a foto no hero e nos cards do blog
+// ==================== IMAGENS DE FUNDO ====================
+/**
+ * Carrega imagens de fundo no hero e nos cards do blog
+ */
+function loadBackgroundImages() {
   const heroBg = document.getElementById('heroBg');
-  if (heroBg) heroBg.style.backgroundImage = 'url(' + HERO_IMG + ')';
-  Object.entries(BLOG_IMAGES).forEach(([selector, imageUrl]) => {
-    const el = document.querySelector(selector);
-    if (el) el.style.backgroundImage = 'url(' + imageUrl + ')';
-  });
+  if (heroBg) {
+    heroBg.style.backgroundImage = `url(${HERO_IMG})`;
+  }
 
-  // NAV
-  const nav      = document.getElementById('nav');
+  Object.entries(BLOG_IMAGES).forEach(([selector, imageUrl]) => {
+    const element = document.querySelector(selector);
+    if (element) {
+      element.style.backgroundImage = `url(${imageUrl})`;
+    }
+  });
+}
+
+// ==================== NAVEGAÇÃO ====================
+/**
+ * Inicializa a navegação com destaque da seção ativa ao rolar
+ */
+function initializeNavigation() {
+  const nav = document.getElementById('nav');
   const navLinks = document.getElementById('navLinks');
-  const burger   = document.getElementById('burger');
   const sections = document.querySelectorAll('section[id]');
   const allLinks = document.querySelectorAll('.nav__link:not(.nav__link--cta)');
 
-  function updateNav() {
+  /**
+   * Atualiza a navegação ao rolar a página
+   */
+  function updateActiveNavLink() {
+    // Adiciona classe 'scrolled' quando scroll > 20px
     nav.classList.toggle('scrolled', window.scrollY > 20);
-    let current = '';
-    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 130) current = s.id; });
-    allLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href').replace('#','') === current));
-  }
-  window.addEventListener('scroll', updateNav, { passive: true });
-  updateNav();
 
-  // Mobile menu
+    // Encontra a seção atual
+    let currentSection = '';
+    sections.forEach(section => {
+      if (window.scrollY >= section.offsetTop - 130) {
+        currentSection = section.id;
+      }
+    });
+
+    // Marca o link ativo
+    allLinks.forEach(link => {
+      const sectionId = link.getAttribute('href').replace('#', '');
+      link.classList.toggle('active', sectionId === currentSection);
+    });
+  }
+
+  // Listeners do scroll
+  window.addEventListener('scroll', updateActiveNavLink, { passive: true });
+  updateActiveNavLink();
+}
+
+// ==================== MENU MOBILE ====================
+/**
+ * Inicializa o menu mobile (hamburger)
+ */
+function initializeMobileMenu() {
+  const nav = document.getElementById('nav');
+  const navLinks = document.getElementById('navLinks');
+  const burger = document.getElementById('burger');
+
+  /**
+   * Fecha o menu mobile
+   */
+  function closeMobileMenu() {
+    navLinks.classList.remove('open');
+    burger.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  // Clique no burger
   burger.addEventListener('click', () => {
-    const open = navLinks.classList.toggle('open');
-    burger.classList.toggle('open', open);
-    burger.setAttribute('aria-expanded', String(open));
-    document.body.style.overflow = open ? 'hidden' : '';
+    const isOpen = navLinks.classList.toggle('open');
+    burger.classList.toggle('open', isOpen);
+    burger.setAttribute('aria-expanded', String(isOpen));
+    document.body.style.overflow = isOpen ? 'hidden' : '';
   });
-  navLinks.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => {
-      navLinks.classList.remove('open');
-      burger.classList.remove('open');
-      burger.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
+
+  // Clique em um link do menu
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeMobileMenu);
+  });
+
+  // Clique fora do menu
+  document.addEventListener('click', (event) => {
+    const isClickOutside = !nav.contains(event.target);
+    const isMenuOpen = navLinks.classList.contains('open');
+
+    if (isClickOutside && isMenuOpen) {
+      closeMobileMenu();
+    }
+  });
+}
+
+// ==================== ANIMAÇÃO AO ROLAR ====================
+/**
+ * Inicializa animações de reveal ao rolar a página
+ */
+function initializeScrollReveal() {
+  const observerOptions = {
+    threshold: 0.12,
+    rootMargin: '0px 0px -40px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  // Observa todos os elementos com classe 'reveal'
+  document.querySelectorAll('.reveal').forEach((element) => {
+    observer.observe(element);
+  });
+}
+
+// ==================== SCROLL SUAVE ====================
+/**
+ * Inicializa scroll suave para links internos
+ */
+function initializeSmoothScroll() {
+  document.querySelectorAll('a[href^="#"]').forEach((link) => {
+    link.addEventListener('click', function(event) {
+      const targetSelector = this.getAttribute('href');
+      const targetElement = document.querySelector(targetSelector);
+
+      if (!targetElement) return;
+
+      event.preventDefault();
+
+      // Obtém altura da navegação do CSS
+      const navHeight = parseInt(
+        getComputedStyle(document.documentElement).getPropertyValue('--nav-h')
+      ) || 72;
+
+      // Calcula posição de scroll
+      const scrollPosition = targetElement.getBoundingClientRect().top + window.scrollY - navHeight;
+
+      window.scrollTo({
+        top: scrollPosition,
+        behavior: 'smooth'
+      });
     });
   });
-  document.addEventListener('click', e => {
-    if (!nav.contains(e.target) && navLinks.classList.contains('open')) {
-      navLinks.classList.remove('open');
-      burger.classList.remove('open');
-      burger.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
+}
+
+// ==================== MÁSCARA DE TELEFONE ====================
+/**
+ * Inicializa máscara de formatação para campo de telefone
+ */
+function initializePhoneMask() {
+  const phoneInput = document.getElementById('telefone');
+
+  if (!phoneInput) return;
+
+  phoneInput.addEventListener('input', function() {
+    // Remove tudo que não é número
+    let value = this.value.replace(/\D/g, '').slice(0, 11);
+
+    // Formata conforme a quantidade de números
+    if (value.length > 10) {
+      // (XX) XXXXX-XXXX
+      value = value.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
+    } else if (value.length > 6) {
+      // (XX) XXXX-XXX
+      value = value.replace(/^(\d{2})(\d{4})(\d*)$/, '($1) $2-$3');
+    } else if (value.length > 2) {
+      // (XX) XXX
+      value = value.replace(/^(\d{2})(\d*)$/, '($1) $2');
+    }
+
+    this.value = value;
+  });
+}
+
+// ==================== FORMULÁRIO DE CONTATO ====================
+/**
+ * Inicializa validação e envio do formulário de contato
+ */
+function initializeContactForm() {
+  const form = document.getElementById('contactForm');
+
+  if (!form) return;
+
+  const fieldIds = ['nome', 'email', 'assunto', 'mensagem'];
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  /**
+   * Marca um campo como erro
+   */
+  function showError(fieldId, message) {
+    const field = document.getElementById(fieldId);
+    const errorElement = document.getElementById(`${fieldId}-error`);
+
+    if (field) field.classList.add('error');
+    if (errorElement) errorElement.textContent = message;
+  }
+
+  /**
+   * Remove erro de um campo
+   */
+  function clearError(fieldId) {
+    const field = document.getElementById(fieldId);
+    const errorElement = document.getElementById(`${fieldId}-error`);
+
+    if (field) field.classList.remove('error');
+    if (errorElement) errorElement.textContent = '';
+  }
+
+  // Limpa erros ao digitar
+  fieldIds.forEach((fieldId) => {
+    const field = document.getElementById(fieldId);
+    if (field) {
+      field.addEventListener('input', () => clearError(fieldId));
+      field.addEventListener('change', () => clearError(fieldId));
     }
   });
 
-  // Reveal ao rolar
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
-    });
-  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  // Validação e envio do formulário
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
 
-  // Scroll suave
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', function(e) {
-      const t = document.querySelector(this.getAttribute('href'));
-      if (!t) return;
-      e.preventDefault();
-      const navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 72;
-      window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - navH, behavior: 'smooth' });
-    });
+    // Coleta valores dos campos
+    const name = document.getElementById('nome').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const subject = document.getElementById('assunto').value;
+    const message = document.getElementById('mensagem').value.trim();
+
+    // Validação
+    let isValid = true;
+
+    if (!name || name.length < 3) {
+      showError('nome', 'Informe seu nome completo.');
+      isValid = false;
+    } else {
+      clearError('nome');
+    }
+
+    if (!email || !emailRegex.test(email)) {
+      showError('email', 'Informe um e-mail válido.');
+      isValid = false;
+    } else {
+      clearError('email');
+    }
+
+    if (!subject) {
+      showError('assunto', 'Selecione o assunto.');
+      isValid = false;
+    } else {
+      clearError('assunto');
+    }
+
+    if (!message || message.length < 10) {
+      showError('mensagem', 'Descreva sua mensagem (mín. 10 caracteres).');
+      isValid = false;
+    } else {
+      clearError('mensagem');
+    }
+
+    if (!isValid) return;
+
+    // Envia o formulário
+    const submitBtn = document.getElementById('submitBtn');
+    const btnText = document.getElementById('btnText');
+    const btnSpinner = document.getElementById('btnSpinner');
+
+    submitBtn.disabled = true;
+    btnText.textContent = 'Enviando...';
+    btnSpinner.hidden = false;
+
+    // TODO: Integrar com Formspree ou EmailJS
+    // Exemplo: const response = await fetch('https://formspree.io/f/ID', { ... })
+    await new Promise((resolve) => setTimeout(resolve, 1800));
+
+    // Restaura estado do botão
+    submitBtn.disabled = false;
+    btnText.textContent = 'Enviar mensagem';
+    btnSpinner.hidden = true;
+
+    // Mostra mensagem de sucesso
+    const successMessage = document.getElementById('formSuccess');
+    successMessage.hidden = false;
+    form.reset();
+
+    // Scroll para a mensagem de sucesso
+    successMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+    // Oculta mensagem após 6 segundos
+    setTimeout(() => {
+      successMessage.hidden = true;
+    }, 6000);
   });
-
-  // Mascara telefone
-  const tel = document.getElementById('telefone');
-  if (tel) {
-    tel.addEventListener('input', function() {
-      let v = this.value.replace(/\D/g,'').slice(0,11);
-      if (v.length>10)     v=v.replace(/^(\d{2})(\d{5})(\d{4})$/,'($1) $2-$3');
-      else if(v.length>6)  v=v.replace(/^(\d{2})(\d{4})(\d*)$/,'($1) $2-$3');
-      else if(v.length>2)  v=v.replace(/^(\d{2})(\d*)$/,'($1) $2');
-      this.value = v;
-    });
-  }
-
-  // Formulario
-  const form = document.getElementById('contactForm');
-  if (form) {
-    const se = (id,msg) => { const f=document.getElementById(id),er=document.getElementById(id+'-error'); if(f)f.classList.add('error'); if(er)er.textContent=msg; };
-    const ce = (id)      => { const f=document.getElementById(id),er=document.getElementById(id+'-error'); if(f)f.classList.remove('error'); if(er)er.textContent=''; };
-    ['nome','email','assunto','mensagem'].forEach(id => {
-      const el=document.getElementById(id);
-      if(el){ el.addEventListener('input',()=>ce(id)); el.addEventListener('change',()=>ce(id)); }
-    });
-    form.addEventListener('submit', async e => {
-      e.preventDefault();
-      const n=document.getElementById('nome').value.trim();
-      const em=document.getElementById('email').value.trim();
-      const a=document.getElementById('assunto').value;
-      const m=document.getElementById('mensagem').value.trim();
-      const emailRe=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      let ok=true;
-      if(!n||n.length<3)      { se('nome','Informe seu nome completo.');             ok=false; } else ce('nome');
-      if(!em||!emailRe.test(em)){ se('email','Informe um e-mail valido.');           ok=false; } else ce('email');
-      if(!a)                   { se('assunto','Selecione o assunto.');                ok=false; } else ce('assunto');
-      if(!m||m.length<10)      { se('mensagem','Descreva sua mensagem (min. 10 chars).'); ok=false; } else ce('mensagem');
-      if(!ok) return;
-      const btn=document.getElementById('submitBtn'),bt=document.getElementById('btnText'),bs=document.getElementById('btnSpinner');
-      btn.disabled=true; bt.textContent='Enviando...'; bs.hidden=false;
-      // Para envio real: substitua o setTimeout abaixo por uma chamada fetch() ao Formspree ou EmailJS
-      await new Promise(r=>setTimeout(r,1800));
-      btn.disabled=false; bt.textContent='Enviar mensagem'; bs.hidden=true;
-      const fs=document.getElementById('formSuccess'); fs.hidden=false;
-      form.reset();
-      fs.scrollIntoView({behavior:'smooth',block:'nearest'});
-      setTimeout(()=>{ fs.hidden=true; },6000);
-    });
-  }
-
-});
+}

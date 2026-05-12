@@ -7,4 +7,8 @@ Vou criar um arquivo Css separado para guardar algumas coisas que foram alterada
 
 Conforme foi ordenado, removi a div "adv-card__av" e salvei seu css na pasta backup.css .
 
-Adicionei a pasta Pagina-Construção onde fica a Pagina de COnstrução do blog, que futuramente sera substituida por uma pagina de Blog
+Adicionei a pasta Pagina-Construção onde fica a Pagina de COnstrução do blog, que futuramente sera substituida por uma pagina de Blog .
+
+12/05/2026
+
+Conectei a pagina de construção na pagina inicial, falta fazer o formulario de envio .

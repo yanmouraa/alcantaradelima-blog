@@ -245,7 +245,7 @@ function initializeContactForm() {
   });
 
   // Validação e envio do formulário
-  form.addEventListener('submit', function(event) {
+  form.addEventListener('submit', async function(event) {
     // 1. Intercepta o envio para validar os campos primeiro
     event.preventDefault();
 
@@ -299,9 +299,39 @@ function initializeContactForm() {
     btnText.textContent = 'Enviando...';
     btnSpinner.hidden = false;
 
-    // 3. ENVIO REAL:
-    // O comando abaixo "solta" o formulário para o 'action' do HTML.
-    // O navegador sairá da página e irá para o FormSubmit.
-    this.submit(); 
+    // 3. Envia o formulário usando Fetch API
+    try {
+      const formData = new FormData(form);
+      
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        // SUCESSO
+        form.reset();
+        document.getElementById('formSuccess').hidden = false; // Mostra sua div de sucesso
+        btnText.textContent = 'Enviado!';
+        
+        // Scroll suave até a mensagem de sucesso
+        document.getElementById('formSuccess').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      } else {
+        // ERRO DO SERVIDOR
+        alert('Ops! Algo deu errado no servidor. Tente novamente.');
+        btnText.textContent = 'Tentar novamente';
+      }
+    } catch (error) {
+      // ERRO DE CONEXÃO
+      alert('Erro de conexão. Verifique sua internet.');
+      btnText.textContent = 'Erro ao enviar';
+    } finally {
+      // Finaliza o estado do botão
+      submitBtn.disabled = false;
+      btnSpinner.hidden = true;
+    } 
 });
 }

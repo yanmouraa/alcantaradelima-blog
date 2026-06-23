@@ -44,18 +44,7 @@
   .hero__sub { font-size: 13px; padding-left: 16px }
   
   /* Diferenciais */
-  .diff__grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0;
-  }
-  .diff__item {
-    padding: 20px 16px;
-    flex-direction: column;
-    text-align: center;
-    border-right: none;
-    border-bottom: .5px solid rgba(255,255,255,.07);
-  }
-  .diff__item:nth-child(odd) { border-right: .5px solid rgba(255,255,255,.07) }
+  /* Regras de Diferenciais removidas */
   
   /* MVF */
   .mvf {
@@ -165,17 +154,7 @@
   }
   
   /* Diferenciais */
-  .diff__grid {
-    grid-template-columns: 1fr;
-  }
-  .diff__item {
-    padding: 16px 12px;
-    border-right: none;
-    border-bottom: .5px solid rgba(255,255,255,.07);
-  }
-  .diff__item:last-child { border-bottom: none }
-  .diff__title { font-size: 10px }
-  .diff__sub { font-size: 11px }
+  /* Regras de Diferenciais removidas */
   
   /* MVF */
   .mvf { padding: 36px 0 }

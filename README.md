@@ -12,3 +12,7 @@ Adicionei a pasta Pagina-Construção onde fica a Pagina de COnstrução do blog
 12/05/2026
 
 Conectei a pagina de construção na pagina inicial, falta fazer o formulario de envio .
+
+23/06/2026
+
+diff apagado .

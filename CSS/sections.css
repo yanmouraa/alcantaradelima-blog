@@ -1,53 +1,8 @@
 /* ============================================================
-   SECTIONS — Diferenciais · MVF · Sobre · Serviços · Blog · Contato
+   SECTIONS — MVF · Sobre · Serviços · Blog · Contato
    ============================================================ */
 
-/* ---- DIFERENCIAIS ----------------------------------------- */
-.diff {
-  background  : var(--navy);
-  border-top  : 3px solid var(--teal);
-}
-.diff__grid {
-  display               : grid;
-  grid-template-columns : repeat(4, 1fr);
-}
-.diff__item {
-  display     : flex;
-  align-items : center;
-  gap         : 14px;
-  padding     : 24px 26px;
-  border-right: .5px solid rgba(255,255,255,.07);
-  transition  : background .2s;
-}
-.diff__item:last-child   { border-right: none }
-.diff__item:hover        { background: rgba(74,171,155,.06) }
-
-.diff__icon {
-  width          : 40px;
-  height         : 40px;
-  background     : rgba(74,171,155,.12);
-  border-radius  : 8px;
-  display        : flex;
-  align-items    : center;
-  justify-content: center;
-  flex-shrink    : 0;
-}
-.diff__icon svg  { width: 20px; height: 20px; color: var(--teal) }
-
-.diff__title {
-  font-family    : var(--fcond);
-  font-size      : 11px;
-  font-weight    : 600;
-  letter-spacing : 1px;
-  color          : #fff;
-  text-transform : uppercase;
-  margin-bottom  : 3px;
-}
-.diff__sub {
-  font-size   : 12px;
-  color       : rgba(255,255,255,.45);
-  line-height : 1.4;
-}
+/* ----------------------------------------------------------- */
 
 /* ---- MISSÃO / VISÃO / FOCO -------------------------------- */
 .mvf {
@@ -66,32 +21,20 @@
 }
 .mvf__card {
   background : rgba(255,255,255,.03);
-  padding    : 36px 30px;
+  padding    : 30px 30px;
   transition : background .2s;
 }
 .mvf__card:hover { background: rgba(74,171,155,.06) }
 
-.mvf__card-icon {
-  width          : 42px;
-  height         : 42px;
-  background     : rgba(74,171,155,.12);
-  border-radius  : 8px;
-  display        : flex;
-  align-items    : center;
-  justify-content: center;
-  margin-bottom  : 18px;
-}
-.mvf__card-icon svg { width: 22px; height: 22px; color: var(--teal) }
-
 .mvf__card h3 {
   font-family   : var(--fs);
-  font-size     : 22px;
+  font-size     : 2rem;
   font-weight   : 600;
   color         : #fff;
-  margin-bottom : 12px;
+  margin-bottom : 1rem;
 }
 .mvf__card p {
-  font-size   : 14px;
+  font-size   : 1rem;
   color       : rgba(255,255,255,.55);
   line-height : 1.75;
 }
@@ -208,7 +151,7 @@
 .servicos__sub {
   font-size     : 15px;
   color         : var(--text);
-  max-width     : 520px;
+  max-width     : 1136px;
   margin-bottom : 0;
 }
 .srv-grid {

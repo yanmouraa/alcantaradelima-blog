@@ -38,18 +38,14 @@ function loadBackgroundImages() {
 }
 
 // ==================== NAVEGAÇÃO ====================
-/**
- * Inicializa a navegação com destaque da seção ativa ao rolar
- */
+/*Inicializa a navegação com destaque da seção ativa ao rolar*/
 function initializeNavigation() {
   const nav = document.getElementById('nav');
   const navLinks = document.getElementById('navLinks');
   const sections = document.querySelectorAll('section[id]');
   const allLinks = document.querySelectorAll('.nav__link:not(.nav__link--cta)');
 
-  /**
-   * Atualiza a navegação ao rolar a página
-   */
+  /*Atualiza a navegação ao rolar a página*/
   function updateActiveNavLink() {
     // Adiciona classe 'scrolled' quando scroll > 20px
     nav.classList.toggle('scrolled', window.scrollY > 20);
@@ -171,6 +167,9 @@ function initializeSmoothScroll() {
     });
   });
 }
+
+// ==================== SCROLL SUAVE CARDS ==================== /**
+
 
 // ==================== MÁSCARA DE TELEFONE ====================
 /**

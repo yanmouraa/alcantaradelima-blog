@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
   initializeMobileMenu();
   initializeScrollReveal();
   initializeSmoothScroll();
+  initializeServiceCarousel();
   initializePhoneMask();
   initializeContactForm();
 });
@@ -168,8 +169,77 @@ function initializeSmoothScroll() {
   });
 }
 
-// ==================== SCROLL SUAVE CARDS ==================== /**
+// ==================== CARROSSEL DE SERVIÇOS ====================
+function initializeServiceCarousel() {
+  const carousel = document.querySelector('.srv-grid');
+  const prevButton = document.querySelector('.srv-nav-btn--left');
+  const nextButton = document.querySelector('.srv-nav-btn--right');
 
+  if (!carousel || !prevButton || !nextButton) return;
+
+  let isAnimating = false;
+
+  const getGapSize = () => {
+    const style = getComputedStyle(carousel);
+    const gapValue = style.columnGap || style.gap || '0px';
+    const parsedValue = parseFloat(gapValue);
+
+    if (!Number.isFinite(parsedValue)) return 0;
+
+    if (gapValue.includes('rem')) {
+      return parsedValue * parseFloat(getComputedStyle(document.documentElement).fontSize);
+    }
+
+    if (gapValue.includes('em')) {
+      return parsedValue * parseFloat(getComputedStyle(document.body).fontSize);
+    }
+
+    return parsedValue;
+  };
+
+  const getCardStep = () => {
+    const firstCard = carousel.querySelector('.srv-card');
+    if (!firstCard) return 0;
+
+    const cardWidth = firstCard.getBoundingClientRect().width;
+    const gapSize = getGapSize();
+    return cardWidth + gapSize;
+  };
+
+  const scrollCards = (direction) => {
+    if (isAnimating) return;
+
+    const step = getCardStep();
+    if (!step) return;
+
+    isAnimating = true;
+    const targetLeft = carousel.scrollLeft + direction * step;
+
+    const startTime = performance.now();
+    const duration = 500;
+
+    const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+
+    const animate = (currentTime) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const easedProgress = easeOutCubic(progress);
+
+      carousel.scrollLeft = (targetLeft - carousel.scrollLeft) * easedProgress + carousel.scrollLeft;
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      } else {
+        isAnimating = false;
+      }
+    };
+
+    requestAnimationFrame(animate);
+  };
+
+  prevButton.addEventListener('click', () => scrollCards(-1));
+  nextButton.addEventListener('click', () => scrollCards(1));
+}
 
 // ==================== MÁSCARA DE TELEFONE ====================
 /**

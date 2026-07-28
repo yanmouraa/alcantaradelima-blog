@@ -68,9 +68,9 @@ address   { font-style: normal }
 /* ----- Reveal (animação ao rolar) ----- */
 .reveal {
   opacity    : 0;
-  transform  : translateY(26px);
-  transition : opacity   .65s cubic-bezier(.25,.46,.45,.94),
-               transform .65s cubic-bezier(.25,.46,.45,.94);
+  transform  : translateY(24px);
+  transition : opacity   .45s ease,
+               transform .45s ease;
 }
 .reveal.visible  { opacity: 1; transform: none }
 .reveal--d1      { transition-delay: .12s }

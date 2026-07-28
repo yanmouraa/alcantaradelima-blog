@@ -171,6 +171,29 @@
   min-width        : 0;
   scroll-behavior  : smooth;
   scrollbar-width  : none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.srv-dots {
+  display         : none;
+  justify-content : center;
+  gap             : 8px;
+  margin-top      : 8px;
+}
+
+.srv-dot {
+  width            : 8px;
+  height           : 8px;
+  border-radius    : 999px;
+  background       : rgba(13, 34, 68, 0.25);
+  border           : 0;
+  padding          : 0;
+  transition       : transform .2s ease, background .2s ease;
+}
+
+.srv-dot.is-active {
+  background : var(--teal);
+  transform  : scale(1.25);
 }
 
 .srv-nav-btn {
@@ -231,8 +254,8 @@
   flex           : 0 0 calc((100% - 64px) / 3);
   position       : relative;
   overflow       : hidden;
-  transition     : transform .25s, box-shadow .25s, border-color .25s;
   box-shadow     : 0 2px 8px rgba(13,34,68,.07);
+  scroll-snap-align: center;
 }
 
 .srv-grid::-webkit-scrollbar {display: none;}
@@ -247,7 +270,7 @@
   background : var(--teal);
   transition : height .35s ease;
 }
-.srv-card:hover              { transform: translateY(-6px); box-shadow: 0 8px 40px rgba(13,34,68,.14); border-color: rgba(74,171,155,.3) }
+.srv-card:hover              { box-shadow: 0 8px 40px rgba(13,34,68,.14); border-color: rgba(74,171,155,.3) }
 .srv-card:hover::before      { height: 100% }
 
 .srv-card--feat              { background: var(--navy); border-color: var(--navy) }

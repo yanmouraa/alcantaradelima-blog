@@ -174,10 +174,57 @@ function initializeServiceCarousel() {
   const carousel = document.querySelector('.srv-grid');
   const prevButton = document.querySelector('.srv-nav-btn--left');
   const nextButton = document.querySelector('.srv-nav-btn--right');
+  const dotsContainer = document.querySelector('.srv-dots');
 
   if (!carousel || !prevButton || !nextButton) return;
 
   let isAnimating = false;
+
+  const cards = Array.from(carousel.querySelectorAll('.srv-card'));
+
+  if (dotsContainer) {
+    cards.forEach((_, index) => {
+      const dot = document.createElement('button');
+      dot.className = 'srv-dot';
+      dot.type = 'button';
+      dot.setAttribute('aria-label', `Ir para o card ${index + 1}`);
+      dot.addEventListener('click', () => {
+        const card = cards[index];
+        if (card) {
+          card.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        }
+      });
+      dotsContainer.appendChild(dot);
+    });
+  }
+
+  const updateDots = () => {
+    if (!dotsContainer) return;
+
+    const dots = dotsContainer.querySelectorAll('.srv-dot');
+    const carouselCenter = carousel.scrollLeft + (carousel.clientWidth / 2);
+
+    let activeIndex = 0;
+    let smallestDistance = Infinity;
+
+    cards.forEach((card, index) => {
+      const cardCenter = card.offsetLeft + (card.offsetWidth / 2);
+      const distance = Math.abs(cardCenter - carouselCenter);
+
+      if (distance < smallestDistance) {
+        smallestDistance = distance;
+        activeIndex = index;
+      }
+    });
+
+    dots.forEach((dot, index) => {
+      dot.classList.toggle('is-active', index === activeIndex);
+    });
+  };
+
+  carousel.addEventListener('scroll', updateDots, { passive: true });
+  window.addEventListener('resize', updateDots);
+  updateDots();
 
   const getGapSize = () => {
     const style = getComputedStyle(carousel);
@@ -206,6 +253,8 @@ function initializeServiceCarousel() {
     return cardWidth + gapSize;
   };
 
+  const isDesktopCarousel = () => window.matchMedia('(min-width: 769px)').matches;
+
   const scrollCards = (direction) => {
     if (isAnimating) return;
 
@@ -213,28 +262,30 @@ function initializeServiceCarousel() {
     if (!step) return;
 
     isAnimating = true;
-    const targetLeft = carousel.scrollLeft + direction * step;
 
-    const startTime = performance.now();
-    const duration = 500;
+    if (isDesktopCarousel()) {
+      carousel.scrollBy({
+        left: direction * step,
+        behavior: 'smooth'
+      });
+    } else {
+      const activeIndex = cards.findIndex((card) => {
+        const cardLeft = card.offsetLeft;
+        const cardRight = cardLeft + card.offsetWidth;
+        const carouselCenter = carousel.scrollLeft + (carousel.clientWidth / 2);
+        return carouselCenter >= cardLeft && carouselCenter <= cardRight;
+      });
 
-    const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
-
-    const animate = (currentTime) => {
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const easedProgress = easeOutCubic(progress);
-
-      carousel.scrollLeft = (targetLeft - carousel.scrollLeft) * easedProgress + carousel.scrollLeft;
-
-      if (progress < 1) {
-        requestAnimationFrame(animate);
-      } else {
-        isAnimating = false;
+      const nextIndex = Math.min(cards.length - 1, Math.max(0, activeIndex + direction));
+      const nextCard = cards[nextIndex];
+      if (nextCard) {
+        nextCard.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
       }
-    };
+    }
 
-    requestAnimationFrame(animate);
+    window.setTimeout(() => {
+      isAnimating = false;
+    }, 650);
   };
 
   prevButton.addEventListener('click', () => scrollCards(-1));

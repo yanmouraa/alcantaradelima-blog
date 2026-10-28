@@ -333,9 +333,6 @@ function initializeContactForm() {
   const fieldIds = ['nome', 'email', 'assunto', 'mensagem'];
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  /**
-   * Marca um campo como erro
-   */
   function showError(fieldId, message) {
     const field = document.getElementById(fieldId);
     const errorElement = document.getElementById(`${fieldId}-error`);
@@ -344,9 +341,6 @@ function initializeContactForm() {
     if (errorElement) errorElement.textContent = message;
   }
 
-  /**
-   * Remove erro de um campo
-   */
   function clearError(fieldId) {
     const field = document.getElementById(fieldId);
     const errorElement = document.getElementById(`${fieldId}-error`);
@@ -355,7 +349,6 @@ function initializeContactForm() {
     if (errorElement) errorElement.textContent = '';
   }
 
-  // Limpa erros ao digitar
   fieldIds.forEach((fieldId) => {
     const field = document.getElementById(fieldId);
     if (field) {
@@ -364,18 +357,14 @@ function initializeContactForm() {
     }
   });
 
-  // Validação e envio do formulário
   form.addEventListener('submit', async function(event) {
-    // 1. Intercepta o envio para validar os campos primeiro
     event.preventDefault();
 
-    // Coleta valores dos campos
     const name = document.getElementById('nome').value.trim();
     const email = document.getElementById('email').value.trim();
     const subject = document.getElementById('assunto').value;
     const message = document.getElementById('mensagem').value.trim();
 
-    // Lógica de Validação
     let isValid = true;
 
     if (!name || name.length < 3) {
@@ -406,23 +395,24 @@ function initializeContactForm() {
       clearError('mensagem');
     }
 
-    // Se NÃO for válido, para a execução aqui
     if (!isValid) return;
 
-    // 2. Se chegou aqui, os dados estão corretos! 
-    // Vamos preparar o botão visualmente
     const submitBtn = document.getElementById('submitBtn');
     const btnText = document.getElementById('btnText');
     const btnSpinner = document.getElementById('btnSpinner');
+    let finalLabel = 'Enviar mensagem';
 
-    submitBtn.disabled = true;
-    btnText.textContent = 'Enviando...';
-    btnSpinner.hidden = false;
+    const setSubmitLoading = (isLoading, label = 'Enviar mensagem') => {
+      submitBtn.disabled = isLoading;
+      submitBtn.setAttribute('aria-busy', String(isLoading));
+      btnSpinner.hidden = !isLoading;
+      btnText.textContent = isLoading ? 'Enviando...' : label;
+    };
 
-    // 3. Envia o formulário usando Fetch API
+    setSubmitLoading(true);
+
     try {
       const formData = new FormData(form);
-      
       const response = await fetch(form.action, {
         method: 'POST',
         body: formData,
@@ -432,26 +422,21 @@ function initializeContactForm() {
       });
 
       if (response.ok) {
-        // SUCESSO
         form.reset();
-        document.getElementById('formSuccess').hidden = false; // Mostra sua div de sucesso
-        btnText.textContent = 'Enviado!';
-        
-        // Scroll suave até a mensagem de sucesso
+        document.getElementById('formSuccess').hidden = false;
+        finalLabel = 'Enviado!';
+        console.log('Formulário enviado com sucesso!');
         document.getElementById('formSuccess').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       } else {
-        // ERRO DO SERVIDOR
         alert('Ops! Algo deu errado no servidor. Tente novamente.');
-        btnText.textContent = 'Tentar novamente';
+        finalLabel = 'Tentar novamente';
       }
     } catch (error) {
-      // ERRO DE CONEXÃO
       alert('Erro de conexão. Verifique sua internet.');
-      btnText.textContent = 'Erro ao enviar';
+      finalLabel = 'Erro ao enviar';
     } finally {
-      // Finaliza o estado do botão
-      submitBtn.disabled = false;
-      btnSpinner.hidden = true;
-    } 
-});
+      setSubmitLoading(false, finalLabel);
+    }
+  });
 }
+

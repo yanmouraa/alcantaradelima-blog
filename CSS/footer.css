@@ -116,19 +116,19 @@
   color          : #fff;
   padding        : 14px 20px;
   border-radius  : 50px;
-  box-shadow     : 0 4px 20px rgba(37,211,102,.4);
+  box-shadow     : 0 8px 24px rgba(0,0,0,0.35);
   font-family    : var(--fcond);
   font-size      : 12px;
   font-weight    : 700;
   letter-spacing : 1px;
   text-transform : uppercase;
   transition     : transform .25s, box-shadow .25s;
-  animation      : wafloat 3s ease-in-out infinite;
+  animation      : wa-pulse 2.4s ease-out infinite;
 }
 .wa-float svg       { width: 20px; height: 20px; flex-shrink: 0 }
-.wa-float:hover     { transform: scale(1.07); box-shadow: 0 6px 28px rgba(37,211,102,.5) }
+.wa-float:hover     { transform: translateY(-2px) }
 
-@keyframes wafloat {
-  0%, 100% { transform: translateY(0) }
-  50%       { transform: translateY(-5px) }
+@keyframes wa-pulse {
+  0%, 100% { box-shadow: 0 8px 24px rgba(0,0,0,0.35), 0 0 0 0 rgba(37,211,102,0.35) }
+  70% { box-shadow: 0 8px 24px rgba(0,0,0,0.35), 0 0 0 14px rgba(37,211,102,0) }
 }

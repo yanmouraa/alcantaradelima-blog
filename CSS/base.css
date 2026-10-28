@@ -25,6 +25,21 @@
   --amber     : #d97706;
   --amber-lt  : #fef3dd;
   --green-wa  : #25d366;
+  --navy-900          : #0b1a3a;
+  --navy-800          : #0f2147;
+  --navy-700          : #16295a;
+  --field-bg          : #0c1c40;
+  --field-border      : rgba(255,255,255,0.14);
+  --field-border-hover: rgba(255,255,255,0.28);
+  --teal              : #4fb39f;
+  --teal-dark         : #3a9a87;
+  --teal-glow         : rgba(79,179,159,0.22);
+  --text-main         : #ffffff;
+  --text-muted        : #a9b6d3;
+  --placeholder       : #8190b3;
+  --danger            : #ff6b6b;
+  --radius-card       : 22px;
+  --radius-field      : 12px;
 
   /* Tipografia */
   --fs        : 'Cormorant Garamond', Georgia, serif;
@@ -156,6 +171,7 @@ address   { font-style: normal }
   height    : 16px;
   animation : spin .9s linear infinite;
 }
+#btnSpinner[hidden] { display: none !important }
 @keyframes spin { to { transform: rotate(360deg) } }
 
 /* ----- Scrollbar ----- */

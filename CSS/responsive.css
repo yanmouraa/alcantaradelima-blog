@@ -95,11 +95,20 @@
     padding: 48px 0;
   }
   .contato__grid {
-    grid-template-columns: 1fr;
-    gap: 36px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
   }
   .contato__form {
     grid-template-columns: 1fr;
+    padding: 24px;
+  }
+  .contato__right .contato__info { gap: 12px }
+
+  .wa-float {
+    right: 16px;
+    bottom: 16px;
+    padding: 11px 15px;
+    font-size: 10px;
   }
   
   /* Footer */
@@ -198,11 +207,8 @@
   
   /* Contato */
   .contato { padding: 36px 0 }
-  .contato__body { font-size: 14px }
-  .form-group label { font-size: 9px }
-  .form-group input,
-  .form-group select,
-  .form-group textarea { padding: 10px 12px; font-size: 13px }
+  .contato__form { padding: 24px }
+  .form-group label { font-size: 12.5px }
   
   /* Footer */
   .footer__inner { gap: 24px; padding-top: 24px }
@@ -211,10 +217,27 @@
   
   /* WhatsApp Float */
   .wa-float {
-    bottom: 20px;
-    right: 20px;
-    padding: 12px 16px;
-    font-size: 11px;
+    bottom: 16px;
+    right: 16px;
+    padding: 11px 15px;
+    font-size: 10px;
   }
   .wa-float__label { display: none }
+}
+
+@media (max-width: 360px) {
+  .contato__right .contato__info { grid-template-columns: 1fr }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important }
+  .reveal {
+    opacity    : 0;
+    transform  : none;
+    transition : opacity .45s ease !important;
+  }
+  .reveal.visible { opacity: 1 }
+  .reveal--d1 { transition-delay: .12s !important }
+  .reveal--d2 { transition-delay: .24s !important }
+  .reveal--d3 { transition-delay: .36s !important }
 }
